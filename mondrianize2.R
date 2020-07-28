@@ -6,21 +6,29 @@ library(ggplot2)
 
 # random mondrian with random data
 
-random_mondrian <- function(boxes, color_palette = NULL) {
+random_mondrian <- function(boxes, color_palette = NULL, opacity = TRUE) {
   
+  # set default color palette if none provided
   if(is.null(color_palette)) {
     color_palette <- c("red", "blue", "white", "black", "yellow")
   }
 
+  # generate colors for plot by sampling from palette
   colors_rand <- sample(color_palette, boxes, replace = TRUE)
   
-  data_rand <- data.frame(color = colors_rand)
+  # initialize dataframe to store random values of dimensions
+  data_rand <- data.frame(color = colors_rand, alpha = 1)
   
-  dimensions <- c("xmin_rand", "xmax_rand", "ymin_rand", "ymax_rand",
-                  "alpha")
+  # list the dimensions that are going to be randomly generated
+  dimensions <- c("xmin_rand", "xmax_rand", "ymin_rand", "ymax_rand")
   
+  # add alpha as variable if opacity is TRUE
+  if(opacity == TRUE) dimensions <- c(dimensions, "alpha")
+  
+  # generate random values of dimensions
   for(i in dimensions) data_rand[[i]] = runif(boxes, 0, 1)
   
+  # make the plot
   ggplot() + 
     geom_rect(data_rand, mapping = 
                 aes(xmin = xmin_rand, xmax = xmax_rand, 
@@ -30,9 +38,6 @@ random_mondrian <- function(boxes, color_palette = NULL) {
     theme_void() + 
     theme(plot.background = element_rect(color = "black"))
 }
-
-
-
 
 
 
