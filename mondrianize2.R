@@ -7,7 +7,7 @@ library(ggplot2)
 # random mondrian with random data
 
 random_mondrian <- function(boxes, color_palette = NULL, 
-                            opacity = TRUE, borders = FALSE, 
+                            transparency = TRUE, borders = FALSE, 
                             border_scarcity = 1) {
   
   # set default color palette if none provided
@@ -25,8 +25,8 @@ random_mondrian <- function(boxes, color_palette = NULL,
   # list the dimensions that are going to be randomly generated
   dimensions <- c("xmin_rand", "xmax_rand", "ymin_rand", "ymax_rand")
   
-  # add alpha as variable if opacity is TRUE
-  if(opacity == TRUE) dimensions <- c(dimensions, "alpha")
+  # add alpha as variable if transparency is TRUE
+  if(transparency == TRUE) dimensions <- c(dimensions, "alpha")
   
   # generate random values of dimensions
   for(i in dimensions) data_rand[[i]] = runif(boxes, 0, 1)
@@ -65,3 +65,4 @@ random_mondrian <- function(boxes, color_palette = NULL,
 # # colors I like
 # yellows <- c("#e3d66c", "#faeb19", "#df8d07", "#f2af06", "#b1440a")
 # palette_1 <- c("#576391", "#4F0C0D", "#f0c107", "#403734", "#141007")
+ 
